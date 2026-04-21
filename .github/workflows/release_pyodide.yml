@@ -103,6 +103,7 @@ jobs:
           git clone --depth 1 --branch "v$PROTOBUF_VERSION" https://github.com/protocolbuffers/protobuf.git protobuf-wasm
           git -C protobuf-wasm submodule update --init --recursive
           emcmake cmake -S protobuf-wasm -B protobuf-wasm/build_source \
+            -DCMAKE_VERBOSE_MAKEFILE=ON \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
             -Dprotobuf_ABSL_PROVIDER=module \
@@ -130,6 +131,7 @@ jobs:
             -I${{ github.workspace }}/protobuf-wasm/third_party/abseil-cpp
             -I${{ github.workspace }}/protobuf-wasm/third_party/utf8_range
           CMAKE_ARGS: >-
+            -DCMAKE_VERBOSE_MAKEFILE=ON
             -DONNX_USE_PROTOBUF_SHARED_LIBS=OFF
             -DONNX_USE_LITE_PROTO=ON
             -DONNX_PROTOC_EXECUTABLE=${{ github.workspace }}/protobuf-host/bin/protoc
